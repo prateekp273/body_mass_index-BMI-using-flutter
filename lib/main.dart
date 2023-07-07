@@ -241,10 +241,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     const SizedBox(height: 21),
     TextField(
     controller: wtController,
-    decoration: const InputDecoration(
-    labelText: 'Enter your Weight in kgs',
-    prefixIcon: Icon(Icons.line_weight),
-    ),
+      decoration: new InputDecoration(
+        labelText: 'Enter your Weight in kgs',
+        prefixIcon: Icon(Icons.line_weight),
+      ),
+
       keyboardType: TextInputType.number,
     ),
       const SizedBox(height: 11),
@@ -342,6 +343,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   var iAge = int.parse(age);
 
                   var heightInInches = (iFeet * 12) + iInches;
+
                   var bmi = (iWt /
                       (heightInInches * heightInInches)) *
                       703;
@@ -402,12 +404,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
       const SizedBox(height: 16),
       _buildBMIProgressBar(),
-    ],
-    ),
+    ]),
     ),
     ),
     ),
     );
   }
 }
-
