@@ -29,8 +29,10 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   TextEditingController wtController = TextEditingController();
-  TextEditingController heightController = TextEditingController();
+  TextEditingController feetController = TextEditingController();
+  TextEditingController inchesController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
 
   String result = "";
   Color bgColor = Colors.indigo.shade200;
@@ -111,31 +113,89 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     var wt = wtController.text.toString();
                     var height = heightController.text.toString();
                     var age = ageController.text.toString();
+                    var feet = feetController.text.toString();
+                    var inches = inchesController.text.toString();
 
-                    if (wt.isNotEmpty && height.isNotEmpty && age.isNotEmpty) {
-                      var iWt = double.parse(wt);
-                      var iHeight = double.parse(height);
-                      var iAge = int.parse(age);
+                    if (wt.isNotEmpty && age.isNotEmpty) {
+                      if (selectedUnit == HeightUnit.Centimeters) {
+                        if (height.isNotEmpty) {
+                          try {
+                            var iWt = double.parse(wt);
+                            var iHeight = double.parse(height);
+                            var iAge = int.parse(age);
 
-                      var bmiData = calculateBMI(iWt, iHeight, selectedUnit);
+                            var bmiData =
+                            calculateBMI(iWt, iHeight, selectedUnit);
 
-                      var bmi = bmiData['bmi']!;
-                      var category = bmiData['category']!;
+                            var bmi = bmiData['bmi']!;
+                            var category = bmiData['category']!;
 
-                      var msg = "You're $category!";
-                      if (category == "Obesity") {
-                        bgColor = Colors.red.shade200;
-                        msg += " 😦";
-                      } else if (category == "Overweight") {
-                        bgColor = Colors.orange.shade200;
-                      } else if (category == "Underweight") {
-                        bgColor = Colors.yellow.shade200;
+                            var msg = "You're $category!";
+                            if (category == "Obesity") {
+                              bgColor = Colors.red.shade200;
+                              msg += " 😦";
+                            } else if (category == "Overweight") {
+                              bgColor = Colors.orange.shade200;
+                            } else if (category == "Underweight") {
+                              bgColor = Colors.yellow.shade200;
+                            } else {
+                              bgColor = Colors.green.shade200;
+                            }
+                            setState(() {
+                              result =
+                              "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                            });
+                          } catch (e) {
+                            setState(() {
+                              result = "Invalid input values!";
+                            });
+                          }
+                        } else {
+                          setState(() {
+                            result = "Please fill all the required fields!";
+                          });
+                        }
                       } else {
-                        bgColor = Colors.green.shade200;
+                        if (feet.isNotEmpty && inches.isNotEmpty) {
+                          try {
+                            var iWt = double.parse(wt);
+                            var iFeet = double.parse(feet);
+                            var iInches = double.parse(inches);
+                            var iAge = int.parse(age);
+
+                            var heightInInches = (iFeet * 12) + iInches;
+                            var bmi =
+                                (iWt / (heightInInches * heightInInches)) *
+                                    703;
+
+                            var category = getBMICategory(bmi);
+
+                            var msg = "You're $category!";
+                            if (category == "Obesity") {
+                              bgColor = Colors.red.shade200;
+                              msg += " 😦";
+                            } else if (category == "Overweight") {
+                              bgColor = Colors.orange.shade200;
+                            } else if (category == "Underweight") {
+                              bgColor = Colors.yellow.shade200;
+                            } else {
+                              bgColor = Colors.green.shade200;
+                            }
+                            setState(() {
+                              result =
+                              "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                            });
+                          } catch (e) {
+                            setState(() {
+                              result = "Invalid input values!";
+                            });
+                          }
+                        } else {
+                          setState(() {
+                            result = "Please fill all the required fields!";
+                          });
+                        }
                       }
-                      setState(() {
-                        result = "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
-                      });
                     } else {
                       setState(() {
                         result = "Please fill all the required fields!";
@@ -185,31 +245,27 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     } else {
       return Row(
         children: [
-          Expanded(
-            flex: 2,
-            child: TextField(
-              controller: heightController,
-              decoration: const InputDecoration(
-                labelText: 'Feet',
-              ),
-              keyboardType: TextInputType.number,
-            ),
+        Expanded(
+        flex: 2,
+        child: TextField(
+          controller: feetController,
+          decoration: const InputDecoration(
+            labelText: 'Feet',
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            flex: 2,
-            child: TextField(
-              decoration: const InputDecoration(
-                labelText: 'Inches',
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                setState(() {
-                  // Do nothing, inches value is not stored separately
-                });
-              },
-            ),
-          ),
+          keyboardType: TextInputType.number,
+        ),
+      ),
+    const SizedBox(width: 8),
+    Expanded(
+    flex: 2,
+    child: TextField(
+      controller: inchesController,
+      decoration: const InputDecoration(
+        labelText: 'Inches',
+      ),
+      keyboardType: TextInputType.number,
+    ),
+    ),
         ],
       );
     }
@@ -221,6 +277,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     if (unit == HeightUnit.Centimeters) {
       var tM = height / 100;
       var bmi = weight / (tM * tM);
+      bmiData['bmi'] = bmi;
+      bmiData['category'] = getBMICategory(bmi);
+    } else {
+      var feet = double.tryParse(feetController.text) ?? 0.0;
+      var inches = double.tryParse(inchesController.text) ?? 0.0;
+      var heightInInches = (feet * 12) + inches;
+      var bmi = (weight / (heightInInches * heightInInches)) * 703;
       bmiData['bmi'] = bmi;
       bmiData['category'] = getBMICategory(bmi);
     }
@@ -258,9 +321,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   Widget buildBMIProgressBar() {
     double bmi = 0;
-    if (wtController.text.isNotEmpty && heightController.text.isNotEmpty) {
+    if (wtController.text.isNotEmpty &&
+        (heightController.text.isNotEmpty ||
+            (feetController.text.isNotEmpty &&
+                inchesController.text.isNotEmpty))) {
       double weight = double.parse(wtController.text);
-      double height = double.parse(heightController.text);
+      double height = selectedUnit == HeightUnit.Centimeters
+          ? double.parse(heightController.text) / 100
+          : ((double.tryParse(feetController.text) ?? 0.0) * 12) +
+          (double.tryParse(inchesController.text) ?? 0.0);
+
       HeightUnit unit = selectedUnit;
 
       var bmiData = calculateBMI(weight, height, unit);
@@ -335,4 +405,3 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     }
   }
 }
-
