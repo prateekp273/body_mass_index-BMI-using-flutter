@@ -123,17 +123,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       var category = bmiData['category']!;
 
                       var msg = "You're $category!";
+                      var emoji = '';
                       if (category == "Obese") {
                         bgColor = Colors.red.shade200;
+                        emoji = ' \u{1F625}';
                       } else if (category == "Overweight") {
                         bgColor = Colors.orange.shade200;
+                        emoji = ' \u{1F61F}';
                       } else if (category == "Underweight") {
                         bgColor = Colors.yellow.shade200;
+                        emoji = ' \u{1F641}';
                       } else {
                         bgColor = Colors.green.shade200;
+                        emoji = ' \u{1F600}';
                       }
                       setState(() {
-                        result = "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                        result = "$msg$emoji\nYour BMI is: ${bmi.toStringAsFixed(2)}";
                       });
                     } else {
                       setState(() {
