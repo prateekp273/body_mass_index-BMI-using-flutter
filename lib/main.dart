@@ -51,7 +51,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       var feet = double.tryParse(feetController.text) ?? 0.0;
       var inches = double.tryParse(inchesController.text) ?? 0.0;
       var heightInInches = (feet * 12) + inches;
-      var bmi = (weight / (heightInInches * heightInInches)) * 703;
+      var heightInCm = heightInInches * 2.54; // Convert inches to centimeters
+      var bmi = (weight / (heightInCm * heightInCm)) * 10000; // Convert height to meters
       bmiData['bmi'] = bmi;
       bmiData['category'] = _getBMICategory(bmi);
     }
@@ -101,7 +102,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       } else {
         double feet = double.tryParse(feetController.text) ?? 0.0;
         double inches = double.tryParse(inchesController.text) ?? 0.0;
-        height = (feet * 12) + inches;
+        double heightInInches = (feet * 12) + inches;
+        double heightInCm = heightInInches * 2.54; // Convert inches to centimeters
+        height = heightInCm * 0.01; // Convert height to meters
       }
 
       HeightUnit unit = selectedUnit;
@@ -241,11 +244,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     const SizedBox(height: 21),
     TextField(
     controller: wtController,
-      decoration: new InputDecoration(
-        labelText: 'Enter your Weight in kgs',
-        prefixIcon: Icon(Icons.line_weight),
-      ),
-
+    decoration: const InputDecoration(
+    labelText: 'Enter your Weight in kgs',                    prefixIcon: Icon(Icons.line_weight),
+    ),
       keyboardType: TextInputType.number,
     ),
       const SizedBox(height: 11),
@@ -343,10 +344,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   var iAge = int.parse(age);
 
                   var heightInInches = (iFeet * 12) + iInches;
+                  var heightInCm =
+                      heightInInches * 2.54; // Convert inches to centimeters
+                  var heightInM = heightInCm * 0.01; // Convert height to meters
 
                   var bmi = (iWt /
-                      (heightInInches * heightInInches)) *
-                      703;
+                      (heightInM * heightInM)) ;
 
                   var category = _getBMICategory(bmi);
 
@@ -404,10 +407,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       ),
       const SizedBox(height: 16),
       _buildBMIProgressBar(),
-    ]),
+    ],
+    ),
     ),
     ),
     ),
     );
   }
 }
+
+
