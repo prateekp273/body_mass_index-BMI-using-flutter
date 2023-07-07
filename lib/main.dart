@@ -144,18 +144,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   child: const Text('Calculate'),
                 ),
                 const SizedBox(height: 11),
+                const Text(
+                  'BMI Categories',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                buildBMIInfo("Underweight", "<18.5"),
+                buildBMIInfo("Normal weight", "18.5–24.9"),
+                buildBMIInfo("Overweight", "25–29.9"),
+                buildBMIInfo("Obesity", "BMI of 30 or greater"),
+                const SizedBox(height: 16),
                 Text(
                   result,
                   style: const TextStyle(fontSize: 19),
-                ),
-                const SizedBox(height: 16),
-                Column(
-                  children: [
-                    buildBMIInfo("Underweight", "<18.5"),
-                    buildBMIInfo("Normal weight", "18.5–24.9"),
-                    buildBMIInfo("Overweight", "25–29.9"),
-                    buildBMIInfo("Obesity", "BMI of 30 or greater"),
-                  ],
                 ),
               ],
             ),
@@ -239,11 +243,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       return "Underweight";
     } else if (bmi >= 18.5 && bmi < 25) {
       return "Normal weight";
-
     } else if (bmi >= 25 && bmi < 30) {
-    return "Overweight";
+      return "Overweight";
     } else {
-    return "Obesity";
+      return "Obesity";
     }
   }
 
