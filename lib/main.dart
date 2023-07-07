@@ -162,6 +162,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   result,
                   style: const TextStyle(fontSize: 19),
                 ),
+                const SizedBox(height: 16),
+                buildBMIProgressBar(),
               ],
             ),
           ),
@@ -221,37 +223,94 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       var bmi = weight / (tM * tM);
       bmiData['bmi'] = bmi;
 
-      bmiData['category'] = getBMICategory(bmi);
-    }
-    return bmiData;
-  }
+      bmiData['category'] = getBMICategory
+        (double bmi) {
+        if (bmi < 18.5) {
+          return "Underweight";
+        } else if (bmi >= 18.5 && bmi < 25) {
+          return "Normal weight";
+        } else if (bmi >= 25 && bmi < 30) {
+          return "Overweight";
+        } else {
+          return "Obesity";
+        }
+      }
 
-  String getBMICategory(double bmi) {
-    if (bmi < 18.5) {
-      return "Underweight";
-    } else if (bmi >= 18.5 && bmi < 25) {
-      return "Normal weight";
-    } else if (bmi >= 25 && bmi < 30) {
-      return "Overweight";
-    } else {
-      return "Obesity";
-    }
-  }
+      Widget buildBMIProgressBar() {
+        double bmi = 0;
+        if (wtController.text.isNotEmpty && heightController.text.isNotEmpty) {
+          double weight = double.parse(wtController.text);
+          double height = double.parse(heightController.text);
+          HeightUnit unit = selectedUnit;
 
-  Widget buildBMIInfo(String category, String range) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            category,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(width: 8),
-          Text(range),
-        ],
-      ),
-    );
-  }
-}
+          var bmiData = calculateBMI(weight, height, unit);
+          bmi = bmiData['bmi']!;
+        }
+
+        return Column(
+          children: [
+            Text(
+              'BMI Range',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Container(
+              height: 8,
+              width: 200,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 8,
+                    width: bmi * 200 / 50,
+                    decoration: BoxDecoration(
+                      color: getBMIColor(bmi),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Underweight',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Normal weight',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Overweight',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Obesity',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ],
+        );
+      }
+
+      Color getBMIColor(double bmi) {
+        if (bmi < 18.5) {
+          return Colors.blue;
+        } else if (bmi >= 18.5 && bmi < 25) {
+          return Colors.green;
+        } else if (bmi >= 25 && bmi < 30) {
+          return Colors.orange;
+        } else {
+          return Colors.red;
+        }
+      }
