@@ -28,14 +28,14 @@ class DashBoardScreen extends StatefulWidget {
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  var wtController = TextEditingController();
-  var heightController = TextEditingController();
-  var ageController = TextEditingController();
+  TextEditingController wtController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
-  var result = "";
-  var bgColor = Colors.indigo.shade200;
+  String result = "";
+  Color bgColor = Colors.indigo.shade200;
 
-  var selectedUnit = HeightUnit.Centimeters;
+  HeightUnit selectedUnit = HeightUnit.Centimeters;
 
   @override
   Widget build(BuildContext context) {
@@ -112,15 +112,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     var height = heightController.text.toString();
                     var age = ageController.text.toString();
 
-                    if (wt != "" && height != "" && age != "") {
+                    if (wt.isNotEmpty && height.isNotEmpty && age.isNotEmpty) {
                       var iWt = double.parse(wt);
                       var iHeight = double.parse(height);
                       var iAge = int.parse(age);
 
                       var bmiData = calculateBMI(iWt, iHeight, selectedUnit);
 
-                      var bmi = bmiData['bmi'];
-                      var category = bmiData['category'];
+                      var bmi = bmiData['bmi']!;
+                      var category = bmiData['category']!;
 
                       var msg = "You're $category!";
                       if (category == "Obese") {
@@ -147,6 +147,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 Text(
                   result,
                   style: const TextStyle(fontSize: 19),
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: [
+                    buildBMIInfo("Underweight", "<18.5"),
+                    buildBMIInfo("Normal weight", "18.5–24.9"),
+                    buildBMIInfo("Overweight", "25–29.9"),
+                    buildBMIInfo("Obesity", "BMI of 30 or greater"),
+                  ],
                 ),
               ],
             ),
@@ -226,14 +235,32 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   }
 
   String getBMICategory(double bmi) {
-    if (bmi > 30) {
-      return "Obese";
-    } else if (bmi > 25) {
-      return "Overweight";
-    } else if (bmi < 18.5) {
+    if (bmi < 18.5) {
       return "Underweight";
+    } else if (bmi >= 18.5 && bmi < 25) {
+      return "Normal weight";
+
+    } else if (bmi >= 25 && bmi < 30) {
+    return "Overweight";
     } else {
-      return "Healthy";
+    return "Obesity";
     }
+  }
+
+  Widget buildBMIInfo(String category, String range) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            category,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 8),
+          Text(range),
+        ],
+      ),
+    );
   }
 }
