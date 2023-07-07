@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum HeightUnit { Centimeters, FeetInches }
+
 void main() {
   runApp(const FlutterApp());
 }
@@ -27,12 +29,13 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   var wtController = TextEditingController();
-  var ftController = TextEditingController();
-  var inController = TextEditingController();
+  var heightController = TextEditingController();
   var ageController = TextEditingController();
 
   var result = "";
   var bgColor = Colors.indigo.shade200;
+
+  var selectedUnit = HeightUnit.Centimeters;
 
   @override
   Widget build(BuildContext context) {
@@ -65,23 +68,34 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 11),
-                TextField(
-                  controller: ftController,
-                  decoration: const InputDecoration(
-                    labelText: 'Enter your Height (in Feet)',
-                    prefixIcon: Icon(Icons.height),
-                  ),
-                  keyboardType: TextInputType.number,
+                Row(
+                  children: [
+                    const Text(
+                      'Height: ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<HeightUnit>(
+                      value: selectedUnit,
+                      items: const [
+                        DropdownMenuItem(
+                          value: HeightUnit.Centimeters,
+                          child: Text('Centimeters'),
+                        ),
+                        DropdownMenuItem(
+                          value: HeightUnit.FeetInches,
+                          child: Text('Feet & Inches'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedUnit = value!;
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 11),
-                TextField(
-                  controller: inController,
-                  decoration: const InputDecoration(
-                    labelText: 'Enter your Height (in Inches)',
-                    prefixIcon: Icon(Icons.height),
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
+                buildHeightField(),
                 const SizedBox(height: 11),
                 TextField(
                   controller: ageController,
@@ -95,20 +109,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                 ElevatedButton(
                   onPressed: () {
                     var wt = wtController.text.toString();
-                    var ft = ftController.text.toString();
-                    var inch = inController.text.toString();
+                    var height = heightController.text.toString();
                     var age = ageController.text.toString();
 
-                    if (wt != "" && ft != "" && inch != "" && age != "") {
+                    if (wt != "" && height != "" && age != "") {
                       var iWt = double.parse(wt);
-                      var iFt = double.parse(ft);
-                      var iInch = double.parse(inch);
+                      var iHeight = double.parse(height);
                       var iAge = int.parse(age);
 
-                      var tInch = (iFt * 12) + iInch;
-                      var tCm = tInch * 2.54;
-                      var tM = tCm / 100;
-                      var bmi = iWt / (tM * tM);
+                      var bmi = calculateBMI(iWt, iHeight, selectedUnit);
 
                       var msg = "";
                       if (bmi > 30) {
@@ -146,5 +155,67 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
       ),
     );
+  }
+
+  Widget buildHeightField() {
+    if (selectedUnit == HeightUnit.Centimeters) {
+      return TextField(
+        controller: heightController,
+        decoration: const InputDecoration(
+          labelText: 'Enter your Height in cm',
+          prefixIcon: Icon(Icons.height),
+        ),
+        keyboardType: TextInputType.number,
+      );
+    } else {
+      return Row(
+        children: [
+          Expanded(
+            flex: 2,
+            child: TextField(
+              controller: heightController,
+              decoration: const InputDecoration(
+                labelText: 'Feet',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 2,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Inches',
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                setState(() {
+                  // Do nothing, inches value is not stored separately
+                });
+              },
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
+  double calculateBMI(double weight, double height, HeightUnit unit) {
+    if (unit == HeightUnit.Centimeters) {
+      var tM = height / 100;
+      return weight / (tM * tM);
+    } else {
+      var feet = height;
+      var inches = 0.0;
+      if (heightController.text.contains('.')) {
+        var parts = heightController.text.split('.');
+        feet = double.parse(parts[0]);
+        inches = double.parse(parts[1]);
+      }
+      var tInch = (feet * 12) + inches;
+      var tCm = tInch * 2.54;
+      var tM = tCm / 100;
+      return weight / (tM * tM);
+    }
   }
 }
