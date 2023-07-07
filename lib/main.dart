@@ -123,22 +123,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       var category = bmiData['category']!;
 
                       var msg = "You're $category!";
-                      var emoji = '';
-                      if (category == "Obese") {
+                      if (category == "Obesity") {
                         bgColor = Colors.red.shade200;
-                        emoji = ' \u{1F625}';
+                        msg += " 😦";
                       } else if (category == "Overweight") {
                         bgColor = Colors.orange.shade200;
-                        emoji = ' \u{1F61F}';
                       } else if (category == "Underweight") {
                         bgColor = Colors.yellow.shade200;
-                        emoji = ' \u{1F641}';
                       } else {
                         bgColor = Colors.green.shade200;
-                        emoji = ' \u{1F600}';
                       }
                       setState(() {
-                        result = "$msg$emoji\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                        result = "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
                       });
                     } else {
                       setState(() {
@@ -224,20 +220,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       var tM = height / 100;
       var bmi = weight / (tM * tM);
       bmiData['bmi'] = bmi;
-      bmiData['category'] = getBMICategory(bmi);
-    } else {
-      var feet = height;
-      var inches = 0.0;
-      if (heightController.text.contains('.')) {
-        var parts = heightController.text.split('.');
-        feet = double.parse(parts[0]);
-        inches = double.parse(parts[1]);
-      }
-      var tInch = (feet * 12) + inches;
-      var tCm = tInch * 2.54;
-      var tM = tCm / 100;
-      var bmi = weight / (tM * tM);
-      bmiData['bmi'] = bmi;
+
       bmiData['category'] = getBMICategory(bmi);
     }
     return bmiData;
