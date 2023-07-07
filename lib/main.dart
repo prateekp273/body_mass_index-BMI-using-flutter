@@ -35,40 +35,70 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       appBar: AppBar(
         title: const Text("BMI"),
       ),
-      body: Column(
-        children: [
-          Text(
-            'BMI',
-            style: TextStyle(
-              fontSize: 34,
-              fontWeight: FontWeight.w700,
-            ),
+      body: Center(
+        child: Container(
+          width:300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Text(
+                'BMI',
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(height: 21,),
+              TextField(
+                controller: wtController,
+                decoration: InputDecoration(
+                  label: Text('Enter your Weight in kgs)'),
+                  prefixIcon: Icon(Icons.line_weight)
+                ),
+                keyboardType: TextInputType.number,
+              ),
+
+              SizedBox(height: 11,),
+              TextField(
+                controller: inController,
+                decoration: InputDecoration(
+                  label: Text('Enter your Height(in Feet)'),
+                  prefixIcon: Icon(Icons.height),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+
+              SizedBox(height: 11,),
+
+
+              TextField(
+                controller: ftController,
+                decoration: InputDecoration(
+                  label: Text('Enter your Height (in inch)'),
+                  prefixIcon: Icon(Icons.height),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+
+                SizedBox(height: 16,),
+
+                ElevatedButton(onPressed: (){
+
+                  var wt = wtController.text.toString();
+                  var ft = ftController.text.toString();
+                  var inch = inController.text.toString();
+
+                  if(wt!="" && ft!="" && inch!="") {
+
+                  } else{
+
+                  }
+                }, child: Text ('Calculate')),
+
+                Text('')
+            ],
           ),
-          TextField(
-            controller: wtController,
-            decoration: InputDecoration(
-              labelText: 'Enter your Weight in kgs',
-              prefixIcon: Icon(Icons.line_weight),
-            ),
-            keyboardType: TextInputType.number,
-          ),
-          TextField(
-            controller: inController,
-            decoration: InputDecoration(
-              labelText: 'Enter your Height(in Feet)'),
-              prefixIcon: Icon(Icons.line_weight),
-            ),
-            keyboardType: TextInputType.number,
-          ),
-          TextField(
-            controller: wtController,
-            decoration: InputDecoration(
-              labelText: 'Enter your Weight in kgs',
-              prefixIcon: Icon(Icons.line_weight),
-            ),
-            keyboardType: TextInputType.number,
-          ),
-        ],
+        ),
       ),
     );
   }
