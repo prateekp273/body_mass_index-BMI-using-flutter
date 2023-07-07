@@ -99,12 +99,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       var bmi = iWt / (tM * tM);
 
                       var msg = "";
-                      if (bmi > 25) {
+                      if (bmi > 30) {
+                        msg = "You're Obese!";
+                        bgColor = Colors.red.shade200;
+                      } else if (bmi > 25) {
                         msg = "You're Overweight!";
                         bgColor = Colors.orange.shade200;
                       } else if (bmi < 18.5) {
                         msg = "You're Underweight!";
-                        bgColor = Colors.red.shade200;
+                        bgColor = Colors.yellow.shade200;
                       } else {
                         msg = "You're Healthy!";
                         bgColor = Colors.green.shade200;
