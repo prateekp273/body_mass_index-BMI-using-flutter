@@ -29,6 +29,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   var wtController = TextEditingController();
   var ftController = TextEditingController();
   var inController = TextEditingController();
+  var ageController = TextEditingController();
 
   var result = "";
   var bgColor = Colors.indigo.shade200;
@@ -81,17 +82,28 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                   keyboardType: TextInputType.number,
                 ),
+                const SizedBox(height: 11),
+                TextField(
+                  controller: ageController,
+                  decoration: const InputDecoration(
+                    labelText: 'Enter your Age',
+                    prefixIcon: Icon(Icons.calendar_today),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     var wt = wtController.text.toString();
                     var ft = ftController.text.toString();
                     var inch = inController.text.toString();
+                    var age = ageController.text.toString();
 
-                    if (wt != "" && ft != "" && inch != "") {
+                    if (wt != "" && ft != "" && inch != "" && age != "") {
                       var iWt = double.parse(wt);
                       var iFt = double.parse(ft);
                       var iInch = double.parse(inch);
+                      var iAge = int.parse(age);
 
                       var tInch = (iFt * 12) + iInch;
                       var tCm = tInch * 2.54;
