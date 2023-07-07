@@ -117,20 +117,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       var iHeight = double.parse(height);
                       var iAge = int.parse(age);
 
-                      var bmi = calculateBMI(iWt, iHeight, selectedUnit);
+                      var bmiData = calculateBMI(iWt, iHeight, selectedUnit);
 
-                      var msg = "";
-                      if (bmi > 30) {
-                        msg = "You're Obese!";
+                      var bmi = bmiData['bmi'];
+                      var category = bmiData['category'];
+
+                      var msg = "You're $category!";
+                      if (category == "Obese") {
                         bgColor = Colors.red.shade200;
-                      } else if (bmi > 25) {
-                        msg = "You're Overweight!";
+                      } else if (category == "Overweight") {
                         bgColor = Colors.orange.shade200;
-                      } else if (bmi < 18.5) {
-                        msg = "You're Underweight!";
+                      } else if (category == "Underweight") {
                         bgColor = Colors.yellow.shade200;
                       } else {
-                        msg = "You're Healthy!";
                         bgColor = Colors.green.shade200;
                       }
                       setState(() {
@@ -200,10 +199,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     }
   }
 
-  double calculateBMI(double weight, double height, HeightUnit unit) {
+  Map<String, dynamic> calculateBMI(
+      double weight, double height, HeightUnit unit) {
+    var bmiData = <String, dynamic>{};
     if (unit == HeightUnit.Centimeters) {
       var tM = height / 100;
-      return weight / (tM * tM);
+      var bmi = weight / (tM * tM);
+      bmiData['bmi'] = bmi;
+      bmiData['category'] = getBMICategory(bmi);
     } else {
       var feet = height;
       var inches = 0.0;
@@ -215,7 +218,22 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       var tInch = (feet * 12) + inches;
       var tCm = tInch * 2.54;
       var tM = tCm / 100;
-      return weight / (tM * tM);
+      var bmi = weight / (tM * tM);
+      bmiData['bmi'] = bmi;
+      bmiData['category'] = getBMICategory(bmi);
+    }
+    return bmiData;
+  }
+
+  String getBMICategory(double bmi) {
+    if (bmi > 30) {
+      return "Obese";
+    } else if (bmi > 25) {
+      return "Overweight";
+    } else if (bmi < 18.5) {
+      return "Underweight";
+    } else {
+      return "Healthy";
     }
   }
 }
