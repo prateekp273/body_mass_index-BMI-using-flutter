@@ -205,7 +205,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         controller: heightController,
         decoration: const InputDecoration(
           labelText: 'Enter your Height in cm',
-          prefixIcon: Icon(Icons.height),
+          prefixIcon: Icon(Icons.height, color: Colors.orange,),
         ),
         keyboardType: TextInputType.number,
         style: TextStyle(
@@ -286,7 +286,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     controller: wtController,
                     decoration: const InputDecoration(
                       labelText: 'Enter your Weight in kgs',
-                      prefixIcon: Icon(Icons.line_weight),
+                      prefixIcon: Icon(Icons.line_weight, color: Colors.orange,),
                     ),
                     keyboardType: TextInputType.number,
                     style: TextStyle(
@@ -329,7 +329,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     controller: ageController,
                     decoration: const InputDecoration(
                       labelText: 'Enter your Age',
-                      prefixIcon: Icon(Icons.calendar_today),
+                      prefixIcon: Icon(Icons.calendar_today, color: Colors.orange,),
                     ),
                     keyboardType: TextInputType.number,
                     style: TextStyle(
