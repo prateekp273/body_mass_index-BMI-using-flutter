@@ -203,53 +203,53 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     if (selectedUnit == HeightUnit.Centimeters) {
       return TextField(
           controller: heightController,
-        decoration: const InputDecoration(
+          decoration: InputDecoration(
           labelText: 'Enter your Height in cm',
-          prefixIcon: Icon(Icons.height, color: Colors.orange),
-        ),
-        keyboardType: TextInputType.number,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.green, // Set text color to dark black
-          fontSize: 18, // Increase font size
-        ),
-      );
+                  prefixIcon:Icon(Icons.height, color: Colors.orange),
+      ),
+    keyboardType: TextInputType.number,
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.orange, // Set text color to orange
+    fontSize: 18, // Increase font size
+    ),
+    );
     } else {
-      return Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: TextField(
-              controller: feetController,
-              decoration: const InputDecoration(
-                labelText: 'Feet',
-              ),
-              keyboardType: TextInputType.number,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.green, // Set text color to dark black
-                fontSize: 18, // Increase font size
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            flex: 2,
-            child: TextField(
-              controller: inchesController,
-              decoration: const InputDecoration(
-                labelText: 'Inches',
-              ),
-              keyboardType: TextInputType.number,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.green, // Set text color to dark black
-                fontSize: 18, // Increase font size
-              ),
-            ),
-          ),
-        ],
-      );
+    return Row(
+    children: [
+    Expanded(
+    flex: 2,
+    child: TextField(
+    controller: feetController,
+    decoration: InputDecoration(
+    labelText: 'Feet',
+    ),
+    keyboardType: TextInputType.number,
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.orange, // Set text color to orange
+    fontSize: 18, // Increase font size
+    ),
+    ),
+    ),
+    const SizedBox(width: 8),
+    Expanded(
+    flex: 2,
+    child: TextField(
+    controller: inchesController,
+    decoration: InputDecoration(
+    labelText: 'Inches',
+    ),
+    keyboardType: TextInputType.number,
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.orange, // Set text color to orange
+    fontSize: 18, // Increase font size
+    ),
+    ),
+    ),
+    ],
+    );
     }
   }
 
@@ -291,7 +291,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     keyboardType: TextInputType.number,
     style: TextStyle(
     fontWeight: FontWeight.bold,
-    color: Colors.green, // Set text color to dark black
+    color: Colors.green, // Set text color to dark green
     fontSize: 18, // Increase font size
     ),
     ),
@@ -451,9 +451,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     ),
     ),
     const SizedBox(height: 8),
-
-        _buildBMIInfo("Underweight", "<18.5"),
-      _buildBMIInfo("Normal weight", "18.5–24.9"),
+    _buildBMIInfo("Underweight", "<18.5"),
+    _buildBMIInfo("Normal weight", "18.5–24.                    9"),
       _buildBMIInfo("Overweight", "25–29.9"),
       _buildBMIInfo("Obesity", "BMI of 30 or greater"),
       const SizedBox(height: 16),
@@ -472,3 +471,5 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 }
+
+
