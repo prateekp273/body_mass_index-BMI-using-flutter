@@ -447,7 +447,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 8),
