@@ -18,13 +18,16 @@ class FlutterApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.yellow.shade900,
-          hintStyle: TextStyle(color: Colors.green), // Set input hint text color to green
-          labelStyle: TextStyle(color: Colors.green), // Set input label text color to green
+          hintStyle: TextStyle(color: Colors.green),
+          labelStyle: TextStyle(
+            color: Colors.green,
+            fontSize: 18, // Increase font size
+          ),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green), // Set input border color to green
+            borderSide: BorderSide(color: Colors.green),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green), // Set focused input border color to green
+            borderSide: BorderSide(color: Colors.green),
           ),
         ),
       ),
@@ -205,7 +208,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           prefixIcon: Icon(Icons.height),
         ),
         keyboardType: TextInputType.number,
-        style: TextStyle(fontWeight: FontWeight.bold), // Increase font weight
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.green, // Set text color to dark black
+          fontSize: 18, // Increase font size
+        ),
       );
     } else {
       return Row(
@@ -219,22 +226,27 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           ),
           keyboardType: TextInputType.number,
           style: TextStyle(
-              fontWeight: FontWeight.bold), // Increase font weight
+            fontWeight: FontWeight.bold,
+            color: Colors.black87, // Set text color to dark black
+            fontSize: 18, // Increase font size
+          ),
         ),
       ),
     const SizedBox(width: 8),
     Expanded(
     flex: 2,
-    child: TextField(
-    controller: inchesController,
-    decoration: const InputDecoration(
-    labelText: 'Inches',
-    ),
-    keyboardType: TextInputType.number,
-    style:TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.green), // Increase font weight and set text color to green
-    ),
+      child: TextField(
+        controller: inchesController,
+        decoration: const InputDecoration(
+          labelText: 'Inches',
+        ),
+        keyboardType: TextInputType.number,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black87, // Set text color to dark black
+          fontSize: 18, // Increase font size
+        ),
+      ),
     ),
         ],
       );
@@ -244,215 +256,219 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("BMI"),
-        ),
-        body: Container(
+      appBar: AppBar(
+        title: const Text("BMI"),
+      ),
+      body: Container(
         decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/image/background_image.jpg'),
-    fit: BoxFit.cover,
-    ),
-    ),
-    child: Center(
-    child: Container(
-    width: 300,
-    child: SingleChildScrollView(
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-    const Text(
-    'BMI',
-    style: TextStyle(
-    fontSize: 34,
-    fontWeight: FontWeight.w700,
-    ),
-    ),
-    const SizedBox(height: 21),
-    TextField(
-    controller: wtController,
-    decoration: const InputDecoration(
-    labelText: 'Enter your Weight in kgs',
-    prefixIcon: Icon(Icons.line_weight),
-    ),
-    keyboardType: TextInputType.number,
-    style: TextStyle(
-    fontWeight: FontWeight.bold,
-    color: Colors.green), // Increase font weight and set text color to green
-    ),
-    const SizedBox(height: 11),
-    Row(
-    children: [
-    const Text(
-    'Height: ',
-    style: TextStyle(fontSize: 16),
-    ),
-    DropdownButton<HeightUnit>(
-    value: selectedUnit,
-    items: const [
-    DropdownMenuItem(
-    value: HeightUnit.Centimeters,
-    child: Text('Centimeters'),
-    ),
-    DropdownMenuItem(
-    value: HeightUnit.FeetInches,
-    child: Text('Feet & Inches'),
-    ),
-    ],
-    onChanged: (value) {
-    setState(() {
-    selectedUnit = value!;
-    });
-    },
-    ),
-    ],
-    ),
-    const SizedBox(height: 11),
-    _buildHeightField(),
-    const SizedBox(height: 11),
-    TextField(
-    controller: ageController,
-    decoration: const InputDecoration(
-    labelText: 'Enter your Age',
-    prefixIcon: Icon(Icons.calendar_today),
-    ),
-    keyboardType: TextInputType.number,
-    style: TextStyle(
-    fontWeight: FontWeight.bold,
-    color: Colors.green), // Increase font weight and set text color to green
-    ),
-    const SizedBox(height: 16),
-    ElevatedButton(
-    onPressed: () {
-    var wt = wtController.text.toString();
-    var height = heightController.text.toString();
-    var age = ageController.text.toString();
-    var feet = feetController.text.toString();
-    var inches = inchesController.text.toString();
+          image: DecorationImage(
+            image: AssetImage('assets/image/background_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Container(
+            width: 300,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'BMI',
+                    style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white, // Set text color to white
+                    ),
+                  ),
+                  const SizedBox(height: 21),
+                  TextField(
+                    controller: wtController,
+                    decoration: const InputDecoration(
+                      labelText: 'Enter your Weight in kgs',
+                      prefixIcon: Icon(Icons.line_weight),
+                    ),
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87, // Set text color to dark black
+                      fontSize: 18, // Increase font size
+                    ),
+                  ),
+                  const SizedBox(height: 11),
+                  Row(
+                    children: [
+                      const Text(
+                        'Height: ',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      DropdownButton<HeightUnit>(
+                        value: selectedUnit,
+                        items: const [
+                          DropdownMenuItem(
+                            value: HeightUnit.Centimeters,
+                            child: Text('Centimeters'),
+                          ),
+                          DropdownMenuItem(
+                            value: HeightUnit.FeetInches,
+                            child: Text('Feet & Inches'),
+                          ),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            selectedUnit = value!;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 11),
+                  _buildHeightField(),
+                  const SizedBox(height: 11),
+                  TextField(
+                    controller: ageController,
+                    decoration: const InputDecoration(
+                      labelText: 'Enter your Age',
+                      prefixIcon: Icon(Icons.calendar_today),
+                    ),
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green, // Set text color to dark black
+                      fontSize: 18, // Increase font size
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      var wt = wtController.text.toString();
+                      var height = heightController.text.toString();
+                      var age = ageController.text.toString();
+                      var feet = feetController.text.toString();
+                      var inches = inchesController.text.toString();
 
-    if (wt.isNotEmpty && age.isNotEmpty) {
-    if (selectedUnit == HeightUnit.Centimeters) {
-    if (height.isNotEmpty) {
-    try {
-    var iWt = double.parse(wt);
-    var iHeight = double.parse(height);
-    var iAge = int.parse(age);
+                      if (wt.isNotEmpty && age.isNotEmpty) {
+                        if (selectedUnit == HeightUnit.Centimeters) {
+                          if (height.isNotEmpty) {
+                            try {
+                              var iWt = double.parse(wt);
+                              var iHeight = double.parse(height);
+                              var iAge = int.parse(age);
 
-    var bmiData =
-    calculateBMI(iWt, iHeight, selectedUnit);
+                              var bmiData =
+                              calculateBMI(iWt, iHeight, selectedUnit);
 
-    var bmi = bmiData['bmi']!;
-    var category = bmiData['category']!;
+                              var bmi = bmiData['bmi']!;
+                              var category = bmiData['category']!;
 
-    var msg = "You're $category!";
-    if (category == "Obesity") {
-    bgColor = Colors.red.shade200;
-    msg += " 😦";
-    } else if (category == "Overweight") {
-    bgColor = Colors.orange.shade200;
-    } else if (category == "Underweight") {
-    bgColor = Colors.yellow.shade200;
-    } else {
-    bgColor = Colors.green.shade200;
-    }
-    setState(() {
-    result =
-    "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
-    });
-    } catch (e) {
-    setState(() {
-    result = "Invalid input values!";
-    });
-    }
-    } else {
-    setState(() {
-    result = "Please fill all the required fields!";
-    });
-    }
-    } else {
-    if (feet.isNotEmpty && inches.isNotEmpty) {
-    try {
-    var iWt = double.parse(wt);
-    var iFeet = double.parse(feet);
-    var iInches = double.parse(inches);
-    var iAge = int.parse(age);
+                              var msg = "You're $category!";
+                              if (category == "Obesity") {
+                                bgColor = Colors.red.shade200;
+                                msg += " 😦";
+                              } else if (category == "Overweight") {
+                                bgColor = Colors.orange.shade200;
+                              } else if (category == "Underweight") {
+                                bgColor = Colors.yellow.shade200;
+                              } else {
+                                bgColor = Colors.green.shade200;
+                              }
+                              setState(() {
+                                result =
+                                "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                              });
+                            } catch (e) {
+                              setState(() {
+                                result = "Invalid input values!";
+                              });
+                            }
+                          } else {
+                            setState(() {
+                              result = "Please fill all the required fields!";
+                            });
+                          }
+                        } else {
+                          if (feet.isNotEmpty && inches.isNotEmpty) {
+                            try {
+                              var iWt = double.parse(wt);
+                              var iFeet = double.parse(feet);
+                              var iInches = double.parse(inches);
+                              var iAge = int.parse(age);
 
-    var heightInInches =
-    (iFeet * 12) + iInches;
-    var heightInCm =
-    heightInInches *
-    2.54; // Convert inches to centimeters
-    var heightInM =
-    heightInCm * 0.01; // Convert height to meters
+                              var heightInInches =
+                                  (iFeet * 12) + iInches;
+                              var heightInCm =
+                                  heightInInches *
+                                      2.54; // Convert inches to centimeters
+                              var heightInM =
+                                  heightInCm * 0.01; // Convert height to meters
 
-    var bmi = (iWt /
-    (heightInM * heightInM));
+                              var bmi = (iWt /
+                                  (heightInM * heightInM));
 
-    var category = _getBMICategory(bmi);
+                              var category = _getBMICategory(bmi);
 
-    var msg = "You're $category!";
-    if (category == "Obesity") {
-    bgColor = Colors.red.shade200;
-    msg += " 😦";
-    } else if (category == "Overweight") {
-      bgColor = Colors.orange.shade200;
-    } else if (category == "Underweight") {
-      bgColor = Colors.yellow.shade200;
-    } else {
-      bgColor = Colors.green.shade200;
-    }
-    setState(() {
-      result =
-      "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
-    });
-    } catch (e) {
-      setState(() {
-        result = "Invalid input values!";
-      });
-    }
-    } else {
-      setState(() {
-        result = "Please fill all the required fields!";
-      });
-    }
-    }
-    } else {
-      setState(() {
-        result = "Please fill all the required fields!";
-      });
-    }
-    },
-      child: const Text('Calculate'),
-    ),
-      const SizedBox(height: 11),
-      const Text(
-        'BMI Categories',
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.green, // Set text color to green
+                              var msg = "You're $category!";
+                              if (category == "Obesity") {
+                                bgColor = Colors.red.shade200;
+                                msg += " 😦";
+                              } else if (category == "Overweight") {
+                                bgColor = Colors.orange.shade200;
+                              } else if (category == "Underweight") {
+                                bgColor = Colors.yellow.shade200;
+                              } else {
+                                bgColor = Colors.green.shade200;
+                              }
+                              setState(() {
+                                result =
+                                "$msg\nYour BMI is: ${bmi.toStringAsFixed(2)}";
+                              });
+                            } catch (e) {
+                              setState(() {
+                                result = "Invalid input values!";
+                              });
+                            }
+                          } else {
+                            setState(() {
+                              result = "Please fill all the required fields!";
+                            });
+                          }
+                        }
+                      } else {
+                        setState(() {
+                          result = "Please fill all the required fields!";
+                        });
+                      }
+                    },
+                    child: const Text('Calculate'),
+                  ),
+                  const SizedBox(height: 11),
+                  const Text(
+                    'BMI Categories',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  _buildBMIInfo("Underweight", "<18.5"),
+                  _buildBMIInfo("Normal weight", "18.5–24.9"),
+                  _buildBMIInfo("Overweight", "25–29.9"),
+                  _buildBMIInfo("Obesity", "BMI of 30 or greater"),
+                  const SizedBox(height: 16),
+                  Text(
+                    result,
+                    style: const TextStyle(fontSize: 19),
+                  ),
+                  const SizedBox(height: 16),
+                  _buildBMIProgressBar(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
-      const SizedBox(height: 8),
-      _buildBMIInfo("Underweight", "<18.5"),
-      _buildBMIInfo("Normal weight", "18.5–24.9"),
-      _buildBMIInfo("Overweight", "25–29.9"),
-      _buildBMIInfo("Obesity", "BMI of 30 or greater"),
-      const SizedBox(height: 16),
-      Text(
-        result,
-        style: const TextStyle(fontSize: 19),
-      ),
-      const SizedBox(height: 16),
-      _buildBMIProgressBar(),
-    ],
-    ),
-    ),
-    ),
-    ),
-        ),
     );
   }
 }
-
 
