@@ -20,7 +20,7 @@ class FlutterApp extends StatelessWidget {
           fillColor: Colors.yellow.shade900,
           hintStyle: TextStyle(color: Colors.black87),
           labelStyle: TextStyle(
-            color: Colors.black87,
+            color: Colors.orange,
             fontSize: 18, // Increase font size
           ),
           enabledBorder: UnderlineInputBorder(
