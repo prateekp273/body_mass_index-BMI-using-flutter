@@ -18,16 +18,16 @@ class FlutterApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.yellow.shade900,
-          hintStyle: TextStyle(color: Colors.green),
+          hintStyle: TextStyle(color: Colors.black87),
           labelStyle: TextStyle(
-            color: Colors.green,
+            color: Colors.black87,
             fontSize: 18, // Increase font size
           ),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green),
+            borderSide: BorderSide(color: Colors.black87),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.green),
+            borderSide: BorderSide(color: Colors.black87),
           ),
         ),
       ),
@@ -227,7 +227,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           keyboardType: TextInputType.number,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.black87, // Set text color to dark black
+            color: Colors.green, // Set text color to dark black
             fontSize: 18, // Increase font size
           ),
         ),
@@ -243,7 +243,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         keyboardType: TextInputType.number,
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.black87, // Set text color to dark black
+          color: Colors.green, // Set text color to dark black
           fontSize: 18, // Increase font size
         ),
       ),
@@ -291,7 +291,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87, // Set text color to dark black
+                      color: Colors.green, // Set text color to dark black
                       fontSize: 18, // Increase font size
                     ),
                   ),
@@ -334,7 +334,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                     keyboardType: TextInputType.number,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.green, // Set text color to dark black
+                      color: Colors.green, // Set text color to dark green
                       fontSize: 18, // Increase font size
                     ),
                   ),
