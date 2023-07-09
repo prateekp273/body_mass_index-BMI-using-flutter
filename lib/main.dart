@@ -18,16 +18,16 @@ class FlutterApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.yellow.shade900,
-          hintStyle: TextStyle(color: Colors.black87),
+          hintStyle: TextStyle(color: Colors.orange),
           labelStyle: TextStyle(
             color: Colors.orange,
             fontSize: 18, // Increase font size
           ),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: BorderSide(color: Colors.orange),
           ),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: BorderSide(color: Colors.orange),
           ),
         ),
       ),
