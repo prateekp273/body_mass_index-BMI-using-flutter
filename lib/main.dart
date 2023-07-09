@@ -229,7 +229,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         body: Container(
         decoration: BoxDecoration(
         image: DecorationImage(
-        image: AssetImage('assets/background_image.jpg'),
+        image: AssetImage('assets/image/background_image.jpg'),
     fit: BoxFit.cover,
     ),
     ),
