@@ -14,11 +14,19 @@ class FlutterApp extends StatelessWidget {
     return MaterialApp(
       title: "FlutterApp",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: ThemeData(
+        primarySwatch: Colors.yellow,
+        inputDecorationTheme: InputDecorationTheme(
+          fillColor: Colors.yellow.shade900, // Set the input field color to dark blue
+        ),
+      ),
       home: const DashBoardScreen(),
     );
   }
 }
+
+
+
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
