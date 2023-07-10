@@ -452,7 +452,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     ),
     const SizedBox(height: 8),
     _buildBMIInfo("Underweight", "<18.5"),
-    _buildBMIInfo("Normal weight", "18.5–24.                    9"),
+    _buildBMIInfo("Normal weight", "18.5–24.9"),
       _buildBMIInfo("Overweight", "25–29.9"),
       _buildBMIInfo("Obesity", "BMI of 30 or greater"),
       const SizedBox(height: 16),
