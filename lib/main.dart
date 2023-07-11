@@ -340,8 +340,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     keyboardType: TextInputType.number,
     style: TextStyle(
     fontWeight: FontWeight.bold,
-    color: Colors.green, // Set text color to dark green
-    fontSize: 18, // Increase font size
+    color: Colors.green, //Set text color to dark green
+    fontSize: 18, //Increase font size
     ),
     ),
     const SizedBox(height: 16),
