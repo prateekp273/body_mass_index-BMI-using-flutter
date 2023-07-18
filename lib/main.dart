@@ -195,7 +195,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     } else if (bmi >= 25 && bmi < 30) {
       return Colors.orange;
     } else {
-      return Colors.red;
+      return Colors.red.shade800;
     }
   }
 
