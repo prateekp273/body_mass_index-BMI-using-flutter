@@ -18,15 +18,15 @@ class FlutterApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.yellow.shade900,
-          hintStyle: TextStyle(color: Colors.orange),
-          labelStyle: TextStyle(
+          hintStyle: const TextStyle(color: Colors.orange),
+          labelStyle: const TextStyle(
             color: Colors.orange,
             fontSize: 18, // Increase font size
           ),
-          enabledBorder: UnderlineInputBorder(
+          enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.orange),
           ),
-          focusedBorder: UnderlineInputBorder(
+          focusedBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.orange),
           ),
         ),
@@ -133,14 +133,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     return Column(
       children: [
-        Text(
+        const Text(
           'BMI Range',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           height: 8,
           width: 200,
@@ -161,8 +161,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             ],
           ),
         ),
-        SizedBox(height: 8),
-        Row(
+        const SizedBox(height: 8),
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -203,12 +203,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     if (selectedUnit == HeightUnit.Centimeters) {
       return TextField(
           controller: heightController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
           labelText: 'Enter your Height in cm',
                   prefixIcon:Icon(Icons.height, color: Colors.orange),
       ),
     keyboardType: TextInputType.number,
-    style: TextStyle(
+    style: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.orange, // Set text color to orange
     fontSize: 18, // Increase font size
@@ -221,11 +221,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     flex: 2,
     child: TextField(
     controller: feetController,
-    decoration: InputDecoration(
+    decoration: const InputDecoration(
     labelText: 'Feet',
     ),
     keyboardType: TextInputType.number,
-    style: TextStyle(
+    style: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.orange, // Set text color to orange
     fontSize: 18, // Increase font size
@@ -237,11 +237,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     flex: 2,
     child: TextField(
     controller: inchesController,
-    decoration: InputDecoration(
+    decoration: const InputDecoration(
     labelText: 'Inches',
     ),
     keyboardType: TextInputType.number,
-    style: TextStyle(
+    style: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.orange, // Set text color to orange
     fontSize: 18, // Increase font size
@@ -260,7 +260,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         title: const Text("BMI"),
     ),
     body: Container(
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
     image: DecorationImage(
     image: AssetImage('assets/image/background_image.jpg'),
     fit: BoxFit.cover,
@@ -289,7 +289,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     prefixIcon: Icon(Icons.line_weight, color: Colors.orange),
     ),
     keyboardType: TextInputType.number,
-    style: TextStyle(
+    style: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.green, // Set text  color to dark green
     fontSize: 18, // Increase font size
@@ -338,7 +338,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     prefixIcon: Icon(Icons.calendar_today, color: Colors.orange),
     ),
     keyboardType: TextInputType.number,
-    style: TextStyle(
+    style: const TextStyle(
     fontWeight: FontWeight.bold,
     color: Colors.green, //Set text color to dark green
     fontSize: 18, //Increase font size
