@@ -16,6 +16,7 @@ class FlutterApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.yellow,
+
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.yellow.shade900,
           hintStyle: const TextStyle(color: Colors.orange),
